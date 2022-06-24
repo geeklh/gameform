@@ -1,0 +1,35 @@
+*{
+    /* margin: 0;  */
+    /* padding: 200px; */
+}
+
+.form{
+    width: 200px;
+    height: 200px;
+    background: red;
+}
+
+#btn {
+    width: 200px;
+    height: 200px;
+    background: #ff0;
+    text-align: center;
+    line-height: 200px;
+    margin: 100px auto;
+}
+
+.box1 {
+    width: 200px;
+    height: 200px;
+    background: red;
+}
+.box2 {
+    width: 200px;
+    height: 200px;
+    background:darkgray;
+}
+.box3 {
+    width: 200px;
+    height: 200px;
+    background:aqua;
+}
