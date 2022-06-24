@@ -27,6 +27,13 @@ $(function(){
     })
 })
 
+// 人物对话实现
+$(function() {
+    $('.box2').on('touchstart', function() {
+        $('.first').show();
+    })
+})
+
 
 // 一个是动作都包含在function里面
 
