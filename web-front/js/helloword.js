@@ -40,11 +40,16 @@ $(function(){
     var now = {col: 1, row: 1};//横向坐标 纵向坐标
     var last = {col: 0, row: 0};
 
-    
+    // 初始化页面表示页面没有在滑动
+    var isMoving = false;
 
     // 滑动事件
     // 向上滑动
     $('.page').swipeUp(function () {
+        // 判断页面是否在滑动
+        if(isMoving){
+            return;
+        }
         console.log('向上滑动', now.col, now.row);
         // 计算滑动之后lastpage的坐标
         last.col = now.col;
@@ -59,6 +64,10 @@ $(function(){
     })
     // 向下滑动
     $('.page').swipeDown(function () {
+        // 判断页面是否在滑动
+        if(isMoving){
+            return;
+        }
         console.log('向下滑动', now.col, now.row)
         last.col = now.col;
         last.row = now.row;
@@ -70,6 +79,10 @@ $(function(){
     })
     // 向左滑动
     $('.page').swipeLeft(function() {
+        // 判断页面是否在滑动
+        if(isMoving){
+            return;
+        }
         console.log('向左滑动', now.col, now.row);
         last.col = now.col;
         last.row = now.row;
@@ -81,6 +94,10 @@ $(function(){
     })
     // 向右滑动
     $('.page').swipeRight(function() {
+        // 判断页面是否在滑动
+        if(isMoving){
+            return;
+        }
         console.log('向右滑动', now.col, now.row);
         last.col = now.col;
         last.row = now.row;
@@ -122,6 +139,7 @@ $(function(){
         $(lastPage).addClass(outClass);
         $(nowPage).removeClass('hide');
         $(nowPage).addClass(inClass);
+        isMoving = true;
 
         // 动画执行完 清除动画类 收尾工作
         setTimeout(() => {
@@ -133,6 +151,7 @@ $(function(){
             $(nowPage).find('img').removeClass('hide');
             $(nowPage).removeClass(inClass);
             $(nowPage).addClass('page-current');
+            isMoving = false;
         }, 600);
     }
     
