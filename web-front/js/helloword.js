@@ -40,6 +40,8 @@ $(function(){
     var now = {col: 1, row: 1};//横向坐标 纵向坐标
     var last = {col: 0, row: 0};
 
+    
+
     // 滑动事件
     // 向上滑动
     $('.page').swipeUp(function () {
@@ -126,6 +128,9 @@ $(function(){
             $(lastPage).removeClass(outClass);
             $(lastPage).addClass('hide');
             $(lastPage).removeClass('page-current');
+            $(lastPage).find('img').addClass('hide');
+
+            $(nowPage).find('img').removeClass('hide');
             $(nowPage).removeClass(inClass);
             $(nowPage).addClass('page-current');
         }, 600);
