@@ -102,7 +102,6 @@
     from{transform: scale(0.4);}
     to{}
 }
-
 /* 定义翻转的动画 */
 .pt-page-flipInleft {
     animation: flipInleft 0.6s ease both;

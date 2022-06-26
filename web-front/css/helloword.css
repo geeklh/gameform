@@ -26,7 +26,7 @@
     padding: 0;
     outline: none;
     /* 禁止页面行为 */
-    /* touch-action: none; */
+    touch-action: none;
 }
 
 #container {

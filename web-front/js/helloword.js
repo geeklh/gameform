@@ -13,7 +13,6 @@ var arr = [1,2,3];
 $(function(){
     $.each(arr , function(index , item){
         // console.log($.isArray(arr))
-        console.log(index , item)
     })
     $('#dis').hide();
     $('.box1').on('touchstart', function(){
@@ -44,17 +43,57 @@ $(function(){
     // 滑动事件
     // 向上滑动
     $('.page').swipeUp(function () {
-        movePage(direction.up);
+        console.log('向上滑动', now.col, now.row);
+        // 计算滑动之后lastpage的坐标
+        last.col = now.col;
+        last.row = now.row;
+        if(last.col < 5) {
+            // 计算滑动之后进场页面的坐标
+            now.col = last.col + 1;
+            now.row = last.row;
+            movePage(direction.up);
+        }
+        
     })
     // 向下滑动
+    $('.page').swipeDown(function () {
+        console.log('向下滑动', now.col, now.row)
+        last.col = now.col;
+        last.row = now.row;
+        if(last.col > 1) {
+            now.col = last.col - 1;
+            now.row = last.row;
+            movePage(direction.down);
+        }
+    })
     // 向左滑动
+    $('.page').swipeLeft(function() {
+        console.log('向左滑动', now.col, now.row);
+        last.col = now.col;
+        last.row = now.row;
+        if(last.col > 1 && last.col < 5 && last.row == 1){
+            now.col = last.col;
+            now.row = last.row + 1;
+            movePage(direction.left);
+        }
+    })
     // 向右滑动
+    $('.page').swipeRight(function() {
+        console.log('向右滑动', now.col, now.row);
+        last.col = now.col;
+        last.row = now.row;
+        if(last.col > 1 && last.col < 5 && last.row == 2){
+            now.col = last.col;
+            now.row = last.row - 1;
+            movePage(direction.right);
+        }
+    })
+    
     // 定义滑动函数
     function movePage(dir){
         // 初始化参与动画的页面
         var lastPage = '.page-' + last.col + '-' + last.row;
         var nowPage = '.page-' + now.col + '-' + now.row;
-        console.log(nowPage, lastPage);
         // 初始化两个动画类
         var inClass = '';//进场的动画类
         var outClass = '';//出场的动画类
@@ -81,6 +120,15 @@ $(function(){
         $(lastPage).addClass(outClass);
         $(nowPage).removeClass('hide');
         $(nowPage).addClass(inClass);
+
+        // 动画执行完 清除动画类 收尾工作
+        setTimeout(() => {
+            $(lastPage).removeClass(outClass);
+            $(lastPage).addClass('hide');
+            $(lastPage).removeClass('page-current');
+            $(nowPage).removeClass(inClass);
+            $(nowPage).addClass('page-current');
+        }, 600);
     }
     
 })
