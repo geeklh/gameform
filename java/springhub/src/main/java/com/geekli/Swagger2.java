@@ -20,8 +20,9 @@ public class Swagger2 {
                 .paths(PathSelectors.any())
                 .build();
     }
-    private ApiInfo apiInfo(){
-        return  new ApiInfoBuilder()
+
+    private ApiInfo apiInfo() {
+        return new ApiInfoBuilder()
                 .title("app服务API")
                 .description("appAPI服务")
                 .version("1.0")

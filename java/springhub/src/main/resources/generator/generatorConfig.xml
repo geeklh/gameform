@@ -34,29 +34,40 @@
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
-        <table tableName="usermessage" domainObjectName="User" enableCountByExample="false" enableUpdateByExample="false"
+        <table tableName="usermessage" domainObjectName="User" enableCountByExample="false"
+               enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
-        <table tableName="productform" domainObjectName="Userpro" enableCountByExample="false" enableUpdateByExample="false"
+        <table tableName="productform" domainObjectName="Userpro" enableCountByExample="false"
+               enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
         <table tableName="appsc" domainObjectName="Usersc" enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
-        <table tableName="orderform" domainObjectName="Userorder" enableCountByExample="false" enableUpdateByExample="false"
+        <table tableName="orderform" domainObjectName="Userorder" enableCountByExample="false"
+               enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
-        <table tableName="backuserfotm" domainObjectName="Userbackform" enableCountByExample="false" enableUpdateByExample="false"
+        <table tableName="backuserfotm" domainObjectName="Userbackform" enableCountByExample="false"
+               enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
-        <table tableName="backmessage" domainObjectName="Backmessage" enableCountByExample="false" enableUpdateByExample="false"
+        <table tableName="backmessage" domainObjectName="Backmessage" enableCountByExample="false"
+               enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
-        <table tableName="softlink" domainObjectName="SoftLink" enableCountByExample="false" enableUpdateByExample="false"
+        <table tableName="softlink" domainObjectName="SoftLink" enableCountByExample="false"
+               enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
-        <table tableName="orderlist" domainObjectName="OrderList" enableCountByExample="false" enableUpdateByExample="false"
+        <table tableName="orderlist" domainObjectName="OrderList" enableCountByExample="false"
+               enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
-        <table tableName="alipaymentorder" domainObjectName="AliPaymentOrder" enableCountByExample="false" enableUpdateByExample="false"
+        <table tableName="alipaymentorder" domainObjectName="AliPaymentOrder" enableCountByExample="false"
+               enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
-        <table tableName="wxorderlist" domainObjectName="WxOrderList" enableCountByExample="false" enableUpdateByExample="false"
+        <table tableName="wxorderlist" domainObjectName="WxOrderList" enableCountByExample="false"
+               enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
-        <table tableName="wxpaymentorder" domainObjectName="WxPaymentOrder" enableCountByExample="false" enableUpdateByExample="false"
+        <table tableName="wxpaymentorder" domainObjectName="WxPaymentOrder" enableCountByExample="false"
+               enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
-        <table tableName="unionproductlist" domainObjectName="UnionproductList" enableCountByExample="false" enableUpdateByExample="false"
+        <table tableName="unionproductlist" domainObjectName="UnionproductList" enableCountByExample="false"
+               enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
     </context>
 </generatorConfiguration>

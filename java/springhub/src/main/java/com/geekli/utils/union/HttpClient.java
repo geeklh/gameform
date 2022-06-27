@@ -35,7 +35,6 @@ import javax.net.ssl.HttpsURLConnection;
 import com.geekli.utils.union.BaseHttpSSLSocketFactory.TrustAnyHostnameVerifier;
 
 /**
- *
  * @ClassName HttpClient
  * @Description acpsdk发送后台http请求类
  * @date 2016-7-22 下午4:03:25
@@ -64,6 +63,7 @@ public class HttpClient {
 
     /**
      * 获取通信结果
+     *
      * @return
      */
     public String getResult() {
@@ -72,6 +72,7 @@ public class HttpClient {
 
     /**
      * 设置通信结果
+     *
      * @param result
      */
     public void setResult(String result) {
@@ -80,9 +81,10 @@ public class HttpClient {
 
     /**
      * 构造函数
-     * @param url 目标地址
+     *
+     * @param url               目标地址
      * @param connectionTimeout HTTP连接超时时间
-     * @param readTimeOut HTTP读写超时时间
+     * @param readTimeOut       HTTP读写超时时间
      */
     public HttpClient(String url, int connectionTimeout, int readTimeOut) {
         try {
@@ -96,6 +98,7 @@ public class HttpClient {
 
     /**
      * 发送信息到服务端
+     *
      * @param data
      * @param encoding
      * @return
@@ -121,6 +124,7 @@ public class HttpClient {
 
     /**
      * 发送信息到服务端 GET方式
+     *
      * @param data
      * @param encoding
      * @return

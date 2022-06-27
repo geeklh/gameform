@@ -30,13 +30,13 @@ public class ProductController {
     @ApiOperation(value = "删除商品")
     @ResponseBody
     public MyResult deletepro(@RequestParam(value = "sname", required = true) String sname, @RequestParam(value = "id", required = true) String id) {
-        return productService.deletepro(sname,id);
+        return productService.deletepro(sname, id);
     }
 
-    @RequestMapping(value = "/deleteProvider.do",method = RequestMethod.DELETE)
+    @RequestMapping(value = "/deleteProvider.do", method = RequestMethod.DELETE)
     @ApiOperation(value = "批量删除")
     @ResponseBody
-    public MyResult deleteProvider(@RequestBody List<Userpro> list){
+    public MyResult deleteProvider(@RequestBody List<Userpro> list) {
         return productService.deleteProvider(list);
     }
 

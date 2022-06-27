@@ -31,18 +31,19 @@ public class UserServicelmpl implements UserService {
 
     @Autowired
     private UserMapper userMapper;
+
     @Override
-    public MyResult login(User user){
+    public MyResult login(User user) {
         User u = new User();
         List<User> list = new ArrayList<>();
         list = (List<User>) userMapper.login(user);
 
         MyResult result = new MyResult();
-        if (list.size() != 0 ){
+        if (list.size() != 0) {
             result.setCode(0);
             result.setMsg("登录成功");
             result.setObj(list.get(0));
-        }else{
+        } else {
             result.setCode(1);
             result.setMsg("登录失败");
         }

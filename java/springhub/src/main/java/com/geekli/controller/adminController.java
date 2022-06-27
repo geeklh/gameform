@@ -12,7 +12,7 @@ import java.util.List;
 
 @Controller
 @CrossOrigin(maxAge = 3600)
-@Api(value = "后台管理接口",tags = "后台管理接口")
+@Api(value = "后台管理接口", tags = "后台管理接口")
 @RequestMapping(value = "/admin")
 public class adminController {
     @Autowired

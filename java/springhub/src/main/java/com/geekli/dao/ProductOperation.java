@@ -21,7 +21,7 @@ public interface ProductOperation {
     void deletepro(@Param("sname") String sname, @Param("id") String id);
 
     //批量删除
-    @DeleteProvider(type =Provider.class,method = "batchDelete")
+    @DeleteProvider(type = Provider.class, method = "batchDelete")
     int batchDelete(List<Userpro> userpros);
 
     @Update("update `productform` set `describe` = #{describe},`classification` = #{classification},`dayprice` = #{dayprice},`monthprice` = #{monthprice},`yearprice` = #{yearprice},`istry` = #{istry},`vipdis` = #{vipdis},`trytime` = #{trytime} where (`id` = #{id} and `sname` = #{sname})")

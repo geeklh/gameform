@@ -5,13 +5,14 @@ import java.util.List;
 public class MyResult {
     private int code;
     private String msg;
-//    private List<?> list;
+    //    private List<?> list;
     private Object obj;
 
-    public int getCode(){
+    public int getCode() {
         return code;
     }
-    public void setCode(int code){
+
+    public void setCode(int code) {
         this.code = code;
     }
 
