@@ -15,3 +15,6 @@ spring
 
 修改启动类
 
+接口访问测试  
+使用postman 访问链接(get/post...)http://localhost:8080/user/test.do  
+
