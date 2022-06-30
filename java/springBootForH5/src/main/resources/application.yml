@@ -31,9 +31,9 @@ mybatis:
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: com.myproject.modules.**.dto
 
-pagehelper:
-  helper-dialect: mysql
-  reasonable: true
-  support-methods-arguments: true
-  params: count=countSql
-  returnPageInfo: check
+  pagehelper:
+    helper-dialect: mysql
+    reasonable: true
+    support-methods-arguments: true
+    params: count=countSql
+    returnPageInfo: check
