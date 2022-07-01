@@ -24,7 +24,8 @@ spring
 2. 修改pom.xml
 3. 在resource创建generator文件夹、然后在里面创建ggeneratorConfif.xml
 4. 删除原来的application 创建application.yml 编辑内容
-5. 添加maven启动类 ，对mybatis进行逆向编译
+5. 添加maven启动类 ，对mybatis进行逆向编译,但是这不能重复编译，产生的类文件不能给被覆盖  
+静态文件会在原本的基础上续写 从而导致错误
 6. 编辑启动类 加上mappingscan("com.eexample.dao")
 7. 添加usercontroller 加上test.do接口
 8. 启动服务 使用postman测试接口 返回数据
