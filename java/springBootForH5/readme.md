@@ -18,6 +18,13 @@ spring
 接口访问测试  
 使用postman 访问链接(get/post...)http://localhost:8080/user/test.do  
 
+注释器功能说明  
+@Controller spring MVC的controller  
+@RequestMapping 映射web请求，处理类和方法的  
+@ResponseBody 将返回值放在respon里面  
+@RequestBody 将返回值放在request里面
+@PathVariable 接收路径参数  
+@ResController 组合注释Controller 和 ResponseBody
 
 #### 构建工程项目步骤  
 1. 选择spring web、jdbc、jdbc api、mysql、mybatis
