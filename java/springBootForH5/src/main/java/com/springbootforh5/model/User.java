@@ -3,9 +3,13 @@ package com.springbootforh5.model;
 public class User {
     private Integer id;
 
-    private String name;
+    private String username;
 
-    private String password;
+    private Integer age;
+
+    private Integer pass;
+
+    private Integer reward;
 
     public Integer getId() {
         return id;
@@ -15,19 +19,35 @@ public class User {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+    public void setUsername(String username) {
+        this.username = username == null ? null : username.trim();
     }
 
-    public String getPassword() {
-        return password;
+    public Integer getAge() {
+        return age;
     }
 
-    public void setPassword(String password) {
-        this.password = password == null ? null : password.trim();
+    public void setAge(Integer age) {
+        this.age = age;
+    }
+
+    public Integer getPass() {
+        return pass;
+    }
+
+    public void setPass(Integer pass) {
+        this.pass = pass;
+    }
+
+    public Integer getReward() {
+        return reward;
+    }
+
+    public void setReward(Integer reward) {
+        this.reward = reward;
     }
 }
