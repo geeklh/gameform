@@ -1,26 +1,3 @@
-.zhen {
-    width: 100px;
-    height: 100px;
-    background:chocolate;
-}
-.ju {
-    width: 150px;
-    height: 100px;
-    background: black;
-}
-.yuan {
-    width: 100px;
-    height: 100px;
-    background: #ff0;
-    border-radius: 50px;
-}
-.tuo {
-    width:200px;
-    height:100px;
-    background:blueviolet;
-    border-radius:100px / 50px;
-}
-
 * {
     margin: 0;
     padding: 0;

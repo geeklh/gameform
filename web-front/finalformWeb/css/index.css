@@ -1,0 +1,79 @@
+* {
+    margin: 0;
+    padding: 0;
+    outline: none;
+    /* 禁止页面行为 */
+    /* touch-action: none; */
+}
+#container {
+    width: 100%;
+    height: 100%;
+}
+
+/* 公共样式 */
+.hide {
+    display: none;
+}
+
+.page {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+/* 元素样式 随时可调 */
+
+.page-1 {
+    background: #083846;
+}
+.page-1 .img_1 {
+    /* 上下左右居中 */
+    height: 270px;
+    width: 360px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -180px;
+    margin-top: -135px;
+}
+.page-2 .img_1 {
+    /* 上下左右居中 */
+    height: 270px;
+    width: 360px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -180px;
+    margin-top: -135px;
+}
+.page-3 .img_1 {
+    /* 上下左右居中 */
+    height: 270px;
+    width: 360px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -180px;
+    margin-top: -135px;
+}
+.page-4 .img_1 {
+    /* 上下左右居中 */
+    height: 270px;
+    width: 360px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -180px;
+    margin-top: -135px;
+}
+.page-5 .img_1 {
+    /* 上下左右居中 */
+    height: 270px;
+    width: 360px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -180px;
+    margin-top: -135px;
+}
+
