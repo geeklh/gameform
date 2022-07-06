@@ -1,0 +1,113 @@
+/* 动画 */
+/* from to */
+/* 什么时候用from to 什么时候用百分比呢 */
+/* 单一的动画用from to 如果是有多帧的动画交互的时候用百分比 */
+
+/* 定义四个方向的动画 */
+/* 向上滑动 */
+.pt-page-moveToTop{
+    animation: moveToTop 0.6s ease both;   
+}
+
+.pt-page-moveFromBottom{
+    animation: moveFromBottom 0.6s ease both;
+}
+/* 向下滑动 */
+.pt-page-moveToBottom{
+    animation: moveToBottom 0.6s ease both;   
+}
+
+.pt-page-moveFromTop{
+    animation: moveFromTop 0.6s ease both;
+}
+/* 向左滑动 */
+.pt-page-moveToLeft{
+    animation: moveToLeft 0.6s ease both;   
+}
+
+.pt-page-moveFromRight{
+    animation: moveFromRight 0.6s ease both;
+}
+/* 向右滑动 */
+.pt-page-moveToRight{
+    animation: moveToRight 0.6s ease both;   
+}
+
+.pt-page-moveFromLeft{
+    animation: moveFromLeft 0.6s ease both;
+}
+
+@keyframes moveToTop {
+    from{}
+    to{transform: translateY(-100%);}
+}
+@keyframes moveFromBottom {
+    from{transform: translateY(100%);}
+    to{}
+}
+@keyframes moveToBottom {
+    from{}
+    to{transform: translateY(100%);}
+}
+@keyframes moveFromTop {
+    from{transform: translateY(-100%);}
+    to{}
+}
+@keyframes moveToLeft {
+    from{}
+    to{transform: translateX(-100%);}
+}
+@keyframes moveFromRight {
+    from{transform: translateX(100%);}
+    to{}
+}
+@keyframes moveToRight {
+    from{}
+    to{transform: translateX(100%);}
+}
+@keyframes moveFromLeft {
+    from{transform: translateX(-100%);}
+    to{}
+}
+
+/* 定义箭头的动画 */
+.pt-page-moveIconUp {
+    animation: moveIconUp 1.5s ease both infinite;
+}
+@keyframes moveIconUp {
+    /* 拆成多少帧，就看把100拆成多少份 */
+    0% {transform: translateY(100%);opacity: 0;}
+    50% {opacity: 1;}
+    100% {transform: translateY(-100%);opacity: 0;}
+}
+
+/* 定义圆的动画 */
+.pt-page-moveCircle {
+    animation: moveCircle 1.5s ease both;
+}
+@keyframes moveCircle {
+    0%{transform: translateY(-80%);opacity: 0.3;}
+    30%{transform: translateY(10%);opacity: 0.7;}
+    60%{transform: translateY(-20%);opacity: 0.7;}
+    70%{transform: translateY(-10%);opacity: 1;}
+    100%{transform: translateY(0%);opacity: 1;}
+}
+
+/* 定义缩放的动画 */
+.pt-page-scaleUp {
+    animation: scaleUp 0.5s ease both;
+}
+
+@keyframes scaleUp {
+    from{transform: scale(0.4);}
+    to{}
+}
+/* 定义翻转的动画 */
+.pt-page-flipInleft {
+    animation: flipInleft 0.6s ease both;
+    transform-origin: 50% 50%;
+}
+@keyframes flipInleft {
+    from{transform: rotateY(90deg);}
+    to{}
+}
