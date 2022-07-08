@@ -298,6 +298,230 @@ var __reflect = function(p, c, t) {
 /************************************************************************/
 /******/ ({
 
+/***/ "./src/Data.ts":
+/***/ (function(module, exports) {
+
+var Data = /** @class */ (function () {
+    function Data() {
+    }
+    // 小方块的大小会根据操作界面变化
+    Data.getRectWidth = function () {
+        if (Data._rectWidth == 0) {
+            Data._rectWidth = Data.getStageWidth() / 4;
+        }
+        return Data._rectWidth;
+    };
+    Data.getRectRow = function () {
+        if (Data._rectRow == 0) {
+            Data._rectRow = Math.ceil(Data.getStageHeight() / Data.getRectWidth()) + 1;
+        }
+        return Data._rectRow;
+    };
+    Data.getStageWidth = function () {
+        return egret.MainContext.instance.stage.stageWidth;
+    };
+    Data.getStageHeight = function () {
+        return egret.MainContext.instance.stage.stageHeight;
+    };
+    Data._rectWidth = 0;
+    // 分数 在一定时间内点击的方块数量
+    Data.score = 0;
+    // 行数
+    Data._rectRow = 0;
+    return Data;
+}());
+window["Data"] = Data;
+__reflect(Data.prototype,"Data",[]); 
+
+
+/***/ }),
+
+/***/ "./src/Game.ts":
+/***/ (function(module, exports) {
+
+var Game = /** @class */ (function () {
+    function Game(root) {
+        this._root = root;
+        this.createGroupRect();
+        this.creatTimer();
+        this.startGame();
+    }
+    Game.prototype.createGroupRect = function () {
+        this._rectRoot = new egret.Sprite();
+        this._root.addChild(this._rectRoot);
+        this._rectGroup = [];
+        this._row = Data.getRectRow();
+        var groupRect;
+        for (var i = 0; i < this._row; i++) {
+            groupRect = new GroupRect();
+            groupRect.addEventListener("gameOver", this.gameOver, this);
+            groupRect.addEventListener("clickRight", this.nextRow, this);
+            this._rectGroup.push(groupRect);
+            groupRect.y = Data.getRectWidth();
+            this._rectRoot.addChild(groupRect);
+        }
+        this._rectRoot.y = Data.getStageHeight() - this._rectRoot.height;
+    };
+    Game.prototype.nextRow = function () {
+        for (var i = 0; i < this._row; i++) {
+            this._rectGroup[i].move();
+        }
+        Data.score++;
+    };
+    Game.prototype.gameOver = function () {
+        this._timerPanel.stop();
+        if (!this.gameOverPanel) {
+            this.gameOverPanel = new GameOverPanel();
+            this.gameOverPanel.addEventListener("startGame", this.startGame, this);
+        }
+        this._root.addChild(this.gameOverPanel);
+    };
+    Game.prototype.creatTimer = function () {
+        this._timerPanel = new TimerPanel();
+        this._timerPanel.addEventListener("gameOver", this.gameOver, this);
+        this._root.addChild(this._timerPanel);
+    };
+    Game.prototype.startGame = function () {
+        Data.score = 0;
+        for (var i = 0; i < this._row; i++) {
+            this._rectGroup[i].init();
+            this._rectGroup[i].y = Data.getRectWidth() * i;
+            this._rectGroup[i]._currentRow = i;
+            if (i != (this._row - 1)) {
+                this._rectGroup[i].createBlackRect();
+            }
+        }
+        this._timerPanel.start();
+    };
+    return Game;
+}());
+window["Game"] = Game;
+__reflect(Game.prototype,"Game",[]); 
+
+
+/***/ }),
+
+/***/ "./src/GameOverPanel.ts":
+/***/ (function(module, exports) {
+
+var GameOverPanel = /** @class */ (function (_super) {
+    __extends(GameOverPanel, _super);
+    function GameOverPanel() {
+        var _this = _super.call(this) || this;
+        _this.draw();
+        _this.addEventListener(egret.Event.ADDED, _this.showText, _this);
+        return _this;
+    }
+    GameOverPanel.prototype.draw = function () {
+        var w = egret.MainContext.instance.stage.stageWidth;
+        var h = egret.MainContext.instance.stage.stageHeight;
+        // 绘制显示图形
+        this.graphics.beginFill(0x111111, 0.5);
+        this.graphics.drawRect(0, 0, w, h);
+        this.graphics.endFill();
+        // 绘制显示文本
+        this.txt = new egret.TextField();
+        this.txt.width = w;
+        this.txt.y = 100;
+        this.txt.textColor = 0xff0000;
+        this.txt.textAlign = egret.HorizontalAlign.CENTER;
+        this.addChild(this.txt);
+        var btn = new egret.Sprite();
+        btn.graphics.beginFill(0x0000ff);
+        btn.graphics.drawRect(0, 0, 200, 100);
+        btn.graphics.endFill();
+        btn.width = 200;
+        btn.height = 100;
+        btn.x = (w - 200) / 2;
+        btn.y = (h - 100) / 2;
+        this.addChild(btn);
+        btn.touchEnabled = true;
+        btn.addEventListener(egret.TouchEvent.TOUCH_TAP, this.startGame, this);
+    };
+    GameOverPanel.prototype.showText = function () {
+        this.txt.text = "我努力点击了" + Data.score + "步";
+    };
+    GameOverPanel.prototype.startGame = function () {
+        this.parent.removeChild(this);
+        this.dispatchEventWith("startGame");
+    };
+    return GameOverPanel;
+}(egret.Sprite));
+window["GameOverPanel"] = GameOverPanel;
+__reflect(GameOverPanel.prototype,"GameOverPanel",[]); 
+
+
+/***/ }),
+
+/***/ "./src/GroupRect.ts":
+/***/ (function(module, exports) {
+
+var GroupRect = /** @class */ (function (_super) {
+    __extends(GroupRect, _super);
+    function GroupRect() {
+        var _this = _super.call(this) || this;
+        _this._currentRow = 0;
+        _this._currentBlackindex = 0;
+        _this.createRect();
+        return _this;
+    }
+    GroupRect.prototype.createRect = function () {
+        this._rects = [];
+        for (var i = 0; i < 4; i++) {
+            var rect = new Rect();
+            this._rects.push(rect);
+            rect.x = rect.width * i;
+            this.addChild(rect);
+            rect.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onClickRect, this);
+        }
+    };
+    GroupRect.prototype.onClickRect = function (evt) {
+        evt.target.onRectClick();
+        if (evt.target.type == RectType.NONCLICKABLE || this._currentRow != (Data.getRectRow() - 2)) {
+            this.dispatchEventWith("gameOver");
+        }
+        else {
+            this.dispatchEventWith("clickRight");
+        }
+    };
+    GroupRect.prototype.createBlackRect = function () {
+        var n = Math.random();
+        if (n >= 0 && n < 0.25) {
+            this._currentBlackindex = 0;
+        }
+        else if (n >= 0.25 && n < 0.5) {
+            this._currentBlackindex = 1;
+        }
+        else if (n >= 0.5 && n < 0.75) {
+            this._currentBlackindex = 2;
+        }
+        else if (n >= 0.75 && n < 1) {
+            this._currentBlackindex = 3;
+        }
+        this._rects[this._currentBlackindex].type = RectType.CLICKABLE;
+    };
+    // 初始化
+    GroupRect.prototype.init = function () {
+        for (var i = 0; i < 4; i++) {
+            this._rects[i].type = RectType.NONCLICKABLE;
+        }
+    };
+    GroupRect.prototype.move = function () {
+        this._currentRow++;
+        if (this._currentRow == Data.getRectRow()) {
+            this._currentRow = 0;
+            this.createBlackRect();
+        }
+        this.y = this._currentRow * Data.getRectWidth();
+    };
+    return GroupRect;
+}(egret.Sprite));
+window["GroupRect"] = GroupRect;
+__reflect(GroupRect.prototype,"GroupRect",[]); 
+
+
+/***/ }),
+
 /***/ "./src/LoadingUI.ts":
 /***/ (function(module, exports) {
 
@@ -358,8 +582,15 @@ __reflect(LoadingUI.prototype,"LoadingUI",["RES.PromiseTaskReporter"]);
 /***/ "./src/Main.ts":
 /***/ (function(module, exports, __webpack_require__) {
 
+__webpack_require__("./src/Data.ts");
+__webpack_require__("./src/Game.ts");
+__webpack_require__("./src/GameOverPanel.ts");
+__webpack_require__("./src/GroupRect.ts");
 __webpack_require__("./src/LoadingUI.ts");
 __webpack_require__("./src/Platform.ts");
+__webpack_require__("./src/Rect.ts");
+__webpack_require__("./src/RectType.ts");
+__webpack_require__("./src/TimerPanel.ts");
 //////////////////////////////////////////////////////////////////////////////////////
 //
 //  Copyright (c) 2014-present, Egret Technology.
@@ -391,8 +622,14 @@ __webpack_require__("./src/Platform.ts");
 var Main = /** @class */ (function (_super) {
     __extends(Main, _super);
     function Main() {
-        return _super.call(this) || this;
+        var _this = _super.call(this) || this;
+        _this.addEventListener(egret.Event.ADDED_TO_STAGE, _this.addStage, _this);
+        return _this;
     }
+    Main.prototype.addStage = function () {
+        this.removeEventListener(egret.Event.ADDED_TO_STAGE, this.addStage, this);
+        var game = new Game(this);
+    };
     return Main;
 }(egret.DisplayObjectContainer));
 window["Main"] = Main;
@@ -428,6 +665,130 @@ __reflect(DebugPlatform.prototype,"DebugPlatform",["Platform"]);
 if (!window.platform) {
     window.platform = new DebugPlatform();
 }
+
+
+/***/ }),
+
+/***/ "./src/Rect.ts":
+/***/ (function(module, exports) {
+
+var Rect = /** @class */ (function (_super) {
+    __extends(Rect, _super);
+    function Rect() {
+        var _this = _super.call(this) || this;
+        _this._color = [0x000000, 0xffffff, 0xff0000, 0x0000ff]; //黑 白 红 蓝
+        _this._currentColor = 1;
+        _this._type = RectType.NONCLICKABLE;
+        _this.touchEnabled = true;
+        _this.draw();
+        return _this;
+    }
+    Rect.prototype.draw = function () {
+        this.width = Data.getRectWidth();
+        this.height = Data.getRectWidth();
+        this.graphics.lineStyle(1, 0x000000);
+        this.graphics.beginFill(this._color[this._currentColor]);
+        this.graphics.drawRect(0, 0, Data.getRectWidth(), Data.getRectWidth());
+        this.graphics.endFill();
+    };
+    Object.defineProperty(Rect.prototype, "type", {
+        get: function () {
+            return this._type;
+        },
+        set: function (val) {
+            this._type = val;
+            if (this._type == RectType.CLICKABLE) {
+                this._currentColor = 0;
+            }
+            else {
+                this._currentColor = 1;
+            }
+            this.draw();
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Rect.prototype.onRectClick = function () {
+        if (this._type == RectType.CLICKABLE) {
+            this._currentColor = 3;
+        }
+        else {
+            this._currentColor = 2;
+        }
+        this.draw();
+    };
+    return Rect;
+}(egret.Sprite));
+window["Rect"] = Rect;
+__reflect(Rect.prototype,"Rect",[]); 
+
+
+/***/ }),
+
+/***/ "./src/RectType.ts":
+/***/ (function(module, exports) {
+
+var RectType = /** @class */ (function () {
+    function RectType() {
+    }
+    RectType.CLICKABLE = "clickable";
+    RectType.NONCLICKABLE = "nonclickable";
+    return RectType;
+}());
+window["RectType"] = RectType;
+__reflect(RectType.prototype,"RectType",[]); 
+
+
+/***/ }),
+
+/***/ "./src/TimerPanel.ts":
+/***/ (function(module, exports) {
+
+var TimerPanel = /** @class */ (function (_super) {
+    __extends(TimerPanel, _super);
+    function TimerPanel() {
+        var _this = _super.call(this) || this;
+        _this._num = 20;
+        _this._timers = 20;
+        _this.draw();
+        _this.createTimer();
+        return _this;
+    }
+    TimerPanel.prototype.draw = function () {
+        this.txt = new egret.TextField();
+        this.txt.width = egret.MainContext.instance.stage.stageWidth;
+        this.txt.y = 100;
+        this.txt.textColor = 0xff0000;
+        this.txt.textAlign = egret.HorizontalAlign.CENTER;
+        this.txt.text = "20'00'";
+        this.addChild(this.txt);
+    };
+    TimerPanel.prototype.createTimer = function () {
+        this._timer = new egret.Timer(1000, this._num);
+        this._timer.addEventListener(egret.TimerEvent.TIMER, this.onTimer, this);
+        this._timer.addEventListener(egret.TimerEvent.TIMER_COMPLETE, this.onTimerCom, this);
+    };
+    TimerPanel.prototype.onTimer = function () {
+        this._timers -= 1;
+        this.txt.text = this._timers + "'00'";
+    };
+    TimerPanel.prototype.onTimerCom = function () {
+        this.txt.text = "00'00'";
+        this.dispatchEventWith("gameOver");
+    };
+    TimerPanel.prototype.start = function () {
+        this.txt.text = "20'00'";
+        this._timers = 20;
+        this._timer.reset();
+        this._timer.start();
+    };
+    TimerPanel.prototype.stop = function () {
+        this._timer.stop();
+    };
+    return TimerPanel;
+}(egret.Sprite));
+window["TimerPanel"] = TimerPanel;
+__reflect(TimerPanel.prototype,"TimerPanel",[]); 
 
 
 /***/ })

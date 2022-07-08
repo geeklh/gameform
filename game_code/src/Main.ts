@@ -31,19 +31,12 @@ class Main extends egret.DisplayObjectContainer {
 
     public constructor() {
         super();
-        var group:GroupRect = new GroupRect();
-        this.addChild(group);
-
-        group.createBlackRect();
-        group.addEventListener("GameOver", this.GameOver, this);
-        group.addEventListener("ClickRight", this.clickRight, this);
+        this.addEventListener(egret.Event.ADDED_TO_STAGE, this.addStage, this);
     }
 
-    private GameOver(){
-        console.log("gameover");
-    }
-    private clickRight(){
-        console.log("clickright");
+    private addStage(){
+        this.removeEventListener(egret.Event.ADDED_TO_STAGE, this.addStage, this);
+        var game = new Game( this );
     }
 
 }

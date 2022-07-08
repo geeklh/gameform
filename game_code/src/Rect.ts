@@ -22,16 +22,14 @@ class Rect extends egret.Sprite
         return this._type;
     }
     public set type(val:string){
-        if( val != this._type){
-            this._type = val;
-            if( this._type == RectType.CLICKABLE ){
-                this._currentColor = 0;
-            }
-            else{
-                this._currentColor = 1;
-            }
-            this.draw();
+        this._type = val;
+        if( this._type == RectType.CLICKABLE ){
+            this._currentColor = 0;
         }
+        else{
+            this._currentColor = 1;
+        }
+        this.draw();
     }
 
     public onRectClick() {

@@ -16,14 +16,14 @@ class GroupRect extends egret.Sprite{
         }
     }
 
-    private _currentRow:number = 0;
+    public _currentRow:number = 0;
     private onClickRect(evt:egret.TouchEvent){
         evt.target.onRectClick();
         if( evt.target.type == RectType.NONCLICKABLE || this._currentRow != (Data.getRectRow() - 2 ) ){
-            this.dispatchEventWith("GameOver");
+            this.dispatchEventWith("gameOver");
         }
         else {
-            this.dispatchEventWith("ClickRight");
+            this.dispatchEventWith("clickRight");
         }
     }
 
@@ -42,7 +42,7 @@ class GroupRect extends egret.Sprite{
         else if( n>=0.75 && n<1 ) {
             this._currentBlackindex = 3;
         }
-        this._rects[this._currentBlackindex].type  =RectType.CLICKABLE;
+        this._rects[this._currentBlackindex].type = RectType.CLICKABLE;
     }
 
     // 初始化
